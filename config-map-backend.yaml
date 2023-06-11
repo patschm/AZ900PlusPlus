@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apisettings
+# Using LoadBalancer (Public IP)
+# data:
+#   appsettings.json: |-
+#     {
+#       "ConnectionStrings": {
+#         "SqlServer": "Server=20.126.246.48;Database=ProductCatalog;User Id=sa;Password=Test_1234567;MultipleActiveResultSets=true;"
+#       }
+#     }
+# Using ClusterIP. Note the Deployment name. It's the name of the sqlserver pod (selector)
+data:
+  appsettings.json: |-
+    {
+      "ConnectionStrings": {
+        "SqlServer": "Server=mssql-ep;Database=ProductCatalog;User Id=sa;Password=Test_1234567;MultipleActiveResultSets=true;"
+      }
+    }

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: mssql-data
+spec:
+  accessModes:
+  - ReadWriteOnce # the volume can be mounted as read-write by a single node
+#  - ReadOnlyMany  # the volume can be mounted read-only by many nodes
+#  - ReadWriteMany # the volume can be mounted as read-write by many nodes
+  storageClassName: managed-csi # managed-csi-premium for premium
+  resources:
+    requests:
+      storage: 5Gi

@@ -1,0 +1,13 @@
+# Publicly available service
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ep
+spec:
+  type: LoadBalancer
+  selector:
+    app: appname
+    tier: front
+  ports:
+  - name: http
+    port: 80

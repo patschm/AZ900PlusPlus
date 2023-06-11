@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # name of the deployment
+  name: shopapi-deployment
+  # labels uniquely identify the deployment. 
+  # The key names are arbitrary but "app" and "tier" are commonly used.
+  # you can add as many as you like
+  labels:
+    app: shopapi
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+  # selector tells the deployment which pods to talk to (defined in template)
+  # It correlates the deployment with the pod
+    matchLabels: # labels defined in the pod
+      app: shopapi
+      tier: backend
+  template:
+  # The template describes the pod that is launched. The pod too has labels
+  # This is the same as if you define a Pod like this:
+  # apiVersion: v1
+  # kind: Pod
+  # metadata: 
+  #   name: ...
+  #   labels: ...
+    metadata:
+      labels:
+        app: shopapi
+        tier: backend
+    spec:
+  # This part defines the container and which image to use.
+      containers:
+      - name: shopapi
+        image: psimages.azurecr.io/shopapi:v5
+        ports:
+        - containerPort: 80
+  # Optionally we can request and limit resources like cpu, memory, storage and more.
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 250m
+          limits: 
+            memory: 512Mi
+            cpu: 500m
+  # Environment variables as defined in you application.
+        env:
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Kubernetes"
+  # (Disk)Volumes for additional data, like  appsettings.
+        volumeMounts:
+        - name: apisettings-volume
+          mountPath: /app/appsettings.json
+          subPath: appsettings.json
+  # The volume needs to be defined.
+      volumes:
+      - name: apisettings-volume
+        configMap: 
+          name: apisettings
+---
+# Internal service
+apiVersion: v1
+kind: Service
+metadata: 
+  name: shopapi-ep
+spec:
+  type: ClusterIP
+  selector:
+    app: shopapi
+    tier: backend
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+---      
+# Publicly available service
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: shopapi 
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: shopapi
+#     tier: backend
+#   ports:
+#   - name: http
+#     port: 80
+
+
+        

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mvcsettings
+data:
+  appsettings.json: |-
+    {
+      "DataService": {
+        "Url": "http://shopapi-ep:80/"
+      }
+    }

@@ -1,0 +1,21 @@
+﻿@model ACME.Backend.Models.ReviewModel[]
+
+
+@foreach (var review in Model)
+{
+    <div class="mt-5 d-flex justify-content-between align-items-left">
+        <div class="small-ratings">
+            @for (var idx = 0; idx < review.Score; idx++)
+            {
+                <i class="fa fa-star rating-color"></i>
+            }
+            @for (var idx = review.Score; idx < 5; idx++)
+            {
+                <i class="fa fa-star"></i>
+            }
+        </div>
+    </div>
+    <p class="text-start">
+        @review.Text
+    </p>
+}

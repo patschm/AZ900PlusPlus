@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dc87d76c-37e8-413a-9173-19f8d3ea3758</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Datalayer\ACME.DataLayer.Interfaces\ACME.DataLayer.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Datalayer\ACME.DataLayer.Repository.SqlServer\ACME.DataLayer.Repository.SqlServer.csproj" />
+    <ProjectReference Include="..\ACME.Backend.Models\ACME.Backend.Models.csproj" />
+    <ProjectReference Include="..\ACME.Backend.Tools\ACME.Backend.Tools.csproj" />
+  </ItemGroup>
+	<ItemGroup>
+		<InternalsVisibleTo Include="ACME.Backend.ShopApi.IntegrationTests" />
+	</ItemGroup>
+</Project>

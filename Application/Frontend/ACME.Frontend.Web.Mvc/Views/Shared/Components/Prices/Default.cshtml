@@ -1,0 +1,15 @@
+﻿@using System.Globalization;
+@model ACME.Backend.Models.PriceModel[]
+
+@{
+    var nl = new CultureInfo("nl-NL");
+}
+<div class="list-group">
+    @foreach (var price in Model)
+    {
+        <div class="list-group-item list-group-item-action">
+            <div class="col-form-label-lg">@price.ShopName</div>
+            <div class="col-md-10" data-type="currency">@price.BasePrice.ToString("C", nl)</div>
+        </div>
+    }
+</div>

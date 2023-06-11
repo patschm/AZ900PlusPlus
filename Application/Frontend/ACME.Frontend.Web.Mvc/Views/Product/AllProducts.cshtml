@@ -1,0 +1,39 @@
+﻿@model ACME.Backend.Models.ProductModel[]
+@{
+    ViewData["Title"] = $"Products";
+}
+
+<div class="list-group">
+    @foreach (var product in Model)
+    {
+        <a class="list-group-item list-group-item-action" asp-action="ProductDetail" asp-route-pid="@product.Id">
+            <img class="rounded float-start" src="https://angular-training.azureedge.net/@product.Image" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">@product.BrandName @product.Name</p>
+            </div>
+        </a>
+    }
+</div>
+<nav>
+    <ul class="pagination align-items-center">
+        @if (ViewBag.Page > 1) {
+            <li class="page-item">
+                <a class="page-link" asp-action="AllProducts"  asp-route-page="@(ViewBag.Page-1)">Previous</a>
+                </li>
+            <li class="page-item">
+                <a class="page-link" asp-action="AllProducts"  asp-route-page="@(ViewBag.Page-1)">@(ViewBag.Page - 1)</a>
+                </li>
+        }
+        <li class="page-item">
+            <a class="page-link" asp-action="AllProducts"  asp-route-page="@ViewBag.Page">@ViewBag.Page</a>
+         </li>
+        @if(ViewBag.HasNext) {
+            <li class="page-item">
+                <a class="page-link" asp-action="AllProducts" asp-route-page="@(ViewBag.Page+1)">@(ViewBag.Page + 1)</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" asp-action="AllProducts" asp-route-page="@(ViewBag.Page+1)">Next</a>
+            </li>
+        }       
+    </ul>
+</nav>

@@ -1,0 +1,35 @@
+﻿@model ACME.Backend.Models.ProductModel
+@{
+    ViewData["Title"] = $"{Model.BrandName} {Model.Name}";
+}
+<div class="text-left">
+    <div class="row">
+        <h1>@Model.BrandName @Model.Name</h1>
+    </div>
+    <div class="row">
+            <img class="rounded float-start" style="width:400px" src="https://angular-training.azureedge.net/@Model.Image" alt="@Model.Name">
+    </div>    
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab" aria-controls="specs" aria-selected="true">Specifications</button>
+    </li>
+    <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#prices" type="button" role="tab" aria-controls="prices" aria-selected="false">Prices</button>
+    </li>
+    <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+    </li>
+</ul>
+<div class="tab-content">
+    <div id="specs" class="tab-pane fade show active">
+        <vc:specification pid="@Model.Id"></vc:specification>        
+    </div>
+    <div id="prices" class="tab-pane fade">
+        <vc:prices pid="@Model.Id"></vc:prices>
+    </div>
+    <div id="reviews" class="tab-pane fade">
+        <vc:Review pid="@Model.Id"></vc:Review>
+    </div>
+</div>

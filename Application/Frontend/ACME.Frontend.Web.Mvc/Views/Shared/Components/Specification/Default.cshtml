@@ -1,0 +1,11 @@
+﻿@model ACME.Backend.Models.SpecificationModel[]
+
+<div class="text-left">
+@foreach (var spec in Model)
+{
+    <div class="row row-cols-lg-4">
+        <div class="col">@spec.Key</div>
+        <div class="col">@spec.Value</div>
+    </div>
+}
+</div>

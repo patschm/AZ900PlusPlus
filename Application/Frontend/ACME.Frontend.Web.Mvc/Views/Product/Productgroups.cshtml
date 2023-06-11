@@ -1,0 +1,22 @@
+﻿@model ACME.Backend.Models.ProductGroupModel[]
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row">
+    @foreach (var group in Model)
+    {
+        <div class="col-md-4">
+            <a class="btn btn-light" asp-action="Products" asp-route-pgid="@group.Id" asp-route-page=1>
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="https://angular-training.azureedge.net/@group.Image" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">@group.Name</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+

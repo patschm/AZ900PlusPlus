@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopmvc-deployment
+  labels:
+    app: shopmvc
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopmvc
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: shopmvc
+        tier: frontend
+    spec:
+      containers:
+      - name: shopmvc
+        image: psimages.azurecr.io/shopmvc:v1
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 250m
+          limits: 
+            memory: 512Mi
+            cpu: 500m
+        env:
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Kubernetes"
+        volumeMounts:
+        - name: mvcsettings-volume
+          mountPath: /app/appsettings.json
+          subPath: appsettings.json
+      volumes:
+      - name: mvcsettings-volume
+        configMap: 
+          name: mvcsettings
+---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: shopmvc 
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: shopmvc
+#     tier: frontend
+#   ports:
+#   - name: http
+#     port: 80
+#     targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: shopmvc-ep
+spec:
+  type: ClusterIP
+  selector:
+    app: shopmvc
+    tier: frontend
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+
+        

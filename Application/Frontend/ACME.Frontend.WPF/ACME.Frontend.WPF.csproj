@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>False</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Datalayer\ACME.DataLayer.Entities\ACME.DataLayer.Entities.csproj" />
+    <ProjectReference Include="..\..\Datalayer\ACME.DataLayer.Interfaces\ACME.DataLayer.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Datalayer\ACME.DataLayer.Repository.SqlServer\ACME.DataLayer.Repository.SqlServer.csproj" />
+    <ProjectReference Include="..\ACME.Frontend.WPF.UserControls\ACME.Frontend.WPF.UserControls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SpecificationList\SpecificationList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ReviewList\ReviewListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="SpecificationList\SpecificationList.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ReviewList\ReviewListView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
